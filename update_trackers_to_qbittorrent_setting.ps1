@@ -1,5 +1,4 @@
 # 更新 bt-tracker 到 qBittorrent
-
 $merged = 'merged.txt'
 $ConfigFile = "$env:APPDATA\qBittorrent\qBittorrent.ini"
 # write-host $ConfigFile
@@ -22,10 +21,8 @@ foreach($l in (gc $merged))
     $TrackersList += $l + '\n' 
 }
 
-# 更新到 $env:APPDATA\qBittorrent.ini
+# 更新到 $env:APPDATA\qBittorrent\qBittorrent.ini
 (gc $ConfigFile) | % { $_ -replace "^Bittorrent\\TrackersList=.*$", $TrackersList } | set-content $ConfigFile
 
 # pause
 remove-item * -include *.txt
-
-
