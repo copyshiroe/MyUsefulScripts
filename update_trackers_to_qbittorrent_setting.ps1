@@ -9,7 +9,7 @@ Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/ngosang/trackerslist/m
 Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ip.txt' -OutFile 'trackers_all_ip.txt'
 
 # 合并 txt
-get-content *.txt | out-file $merged
+get-content trackers_all_ip.txt,trackers_last.txt,trackers_all.txt | out-file $merged
 
 # 去空行和重复行 
 (gc $merged) | ? {$_.trim() -ne "" } | Select-Object -Unique | set-content $merged
@@ -25,4 +25,4 @@ foreach($l in (gc $merged))
 (gc $ConfigFile) | % { $_ -replace "^Bittorrent\\TrackersList=.*$", $TrackersList } | set-content $ConfigFile
 
 # pause
-remove-item * -include *.txt
+remove-item trackers_last.txt, trackers_all.txt, trackers_all_ip.txt, $merged
