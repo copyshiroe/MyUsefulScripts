@@ -14,7 +14,7 @@ for folder in [ ${path}* ];do
         if [[ "${folder}/${cmpstr}" == "$tmp" ]];then
             #echo "${folder}"
             
-            zip -rm "${folder}.zip" "$folder" 
+            zip -rm "${folder}.zip" "$folder" >>${path}rod.log
             echo -e "------------------------\n" >>${path}rod.log
             rclone move -v "${folder}.zip" "${od}" --transfers=1 --log-file="${path}rod.log"
             echo -e "------------------------\n" >>${path}rod.log
